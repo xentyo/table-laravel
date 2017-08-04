@@ -20,8 +20,9 @@ class Row extends TableList
         return $this->index;
     }
 
-    public function setIndex($index){
-      $this->index = $index;
+    public function setIndex($index)
+    {
+        $this->index = $index;
     }
 
     public function addValue($value, Column $column = null)
@@ -30,5 +31,10 @@ class Row extends TableList
             return $this->values[] = $value;
         }
         return $this->values[$column->name()] = $value;
+    }
+
+    public function getValue($key)
+    {
+        return $this->values[$key];
     }
 }

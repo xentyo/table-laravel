@@ -5,10 +5,11 @@ namespace Xentyo\TableRenderizer;
 /**
  *
  */
-class Table
+class Table implements HtmlRenderable
 {
+    use HtmlElement;
+
     protected $grid;
-    protected $properties;
     public function __construct(array $properties = [])
     {
         $this->grid = new Grid;
@@ -17,6 +18,11 @@ class Table
     public function columns()
     {
         $this->grid->columns();
+    }
+
+    public function rows()
+    {
+        $this->grid->rows();
     }
 
     public function headers()
@@ -28,13 +34,7 @@ class Table
         return $headers;
     }
 
-    public function addColumn($name)
+    public function render($id = null)
     {
-        return $this->grid->addColumn(new Column((string) $name));
-    }
-
-    public function addRow(array $values)
-    {
-        return $this->grid->addRow(new Row($values));
     }
 }
