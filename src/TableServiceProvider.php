@@ -18,6 +18,6 @@ class TableServiceProvider extends ServiceProvider
     {
       $this->app->bind('table', function(){
         return new Xentyo\TableRenderizer\Table;
-      })
+      });
     }
 }
