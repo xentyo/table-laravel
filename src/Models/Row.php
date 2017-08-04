@@ -30,7 +30,7 @@ class Row extends TableList
         if (is_null($column)) {
             return $this->values[] = $value;
         }
-        return $this->values[$column->name()] = $value;
+        return $this->values[$column->property()] = $value;
     }
 
     public function getValue($key)

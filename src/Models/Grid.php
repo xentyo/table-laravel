@@ -8,7 +8,6 @@ namespace Xentyo\TableRenderizer;
 class Grid
 {
     public static $INDEX_ROW = 0;
-    protected $repeatableColumns = true;
     protected $grid = [];
     protected $rows = [];
 
@@ -27,6 +26,16 @@ class Grid
         $this->grid[$column] = [];
     }
 
+    public function getColumn($key)
+    {
+        foreach ($this->columns() as $column) {
+            if ($column->property() == $key) {
+                return $column;
+            }
+        }
+        return false;
+    }
+
     public function removeColumn(Column $column)
     {
         unset($this->grid[$column]);
@@ -37,7 +46,7 @@ class Grid
         $row->setIndex(++self::$INDEX_ROW);
         foreach ($this->grid as $column => $rows) {
             foreach ($row->values() as $key => $value) {
-                if ($column->name() == $key) {
+                if ($column->property() == $key) {
                     $this->grid[$column][$row->index] = $value;
                 }
             }

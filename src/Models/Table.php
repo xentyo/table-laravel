@@ -2,34 +2,28 @@
 
 namespace Xentyo\TableRenderizer;
 
-/**
- *
- */
-class Table implements HtmlRenderable
+class Table extends Grid implements HtmlRenderable
 {
     use HtmlElement;
 
-    protected $grid;
-    public function __construct(array $properties = [])
+    public function column($property, $name = '')
     {
-        $this->grid = new Grid;
+        $column = new Column($property, $name);
+        $this->addColumn($column);
+        return $this;
     }
 
-    public function columns()
+    public function row(array $values)
     {
-        $this->grid->columns();
-    }
-
-    public function rows()
-    {
-        $this->grid->rows();
+        $row = new Row($values);
+        return $row;
     }
 
     public function headers()
     {
         $headers = [];
-        foreach ($columns as $key => $column) {
-            $headers[] = $column->name();
+        foreach ($this->columns as $key => $column) {
+            $headers[] = $column->property();
         }
         return $headers;
     }
