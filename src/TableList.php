@@ -24,7 +24,7 @@ class TableList
 
     public function values(array $indexes = [])
     {
-        if (count($keys) > 0) {
+        if (count($indexes) > 0) {
             $result = $this->values;
             foreach ($indexes as $index) {
                 if (!is_null($result[$index])) {

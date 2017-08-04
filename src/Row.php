@@ -35,6 +35,6 @@ class Row extends TableList
 
     public function getValue($key)
     {
-        return $this->values[$key];
+        return $this->values[$key] ?? null;
     }
 }

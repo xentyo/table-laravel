@@ -1,6 +1,6 @@
 <?php
 
-namespace Xentyo;
+namespace Xentyo\TableRenderizer\Traits;
 
 trait KeyVal{
   protected $keyval = [];

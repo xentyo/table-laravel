@@ -1,6 +1,7 @@
 <?php
 
 namespace Xentyo\TableRenderizer\Traits;
+use Xentyo\TableRenderizer\Property;
 
 trait HtmlElement
 {
@@ -29,7 +30,7 @@ trait HtmlElement
     {
         foreach ($this->properties as $i => $prop) {
             if($prop->key == $key) {
-              unset($this->properties[$i])
+              unset($this->properties[$i]);
             }
         }
     }

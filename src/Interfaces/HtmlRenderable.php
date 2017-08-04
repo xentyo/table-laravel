@@ -1,6 +1,8 @@
 <?php
 
-namespace Xentyo\TableRenderizer;
+namespace Xentyo\TableRenderizer\Interfaces;
+
+use Xentyo\TableRenderizer\Property;
 
 interface HtmlRenderable extends Renderable
 {

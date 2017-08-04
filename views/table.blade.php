@@ -1,7 +1,7 @@
-<table{{$table->props()}}>
+<table{!!$table->props()!!}>
   <thead>
     <tr>
-      @foreach ($table->headers as $key => $header)
+      @foreach ($table->headers() as $key => $header)
         <td>{!! $header !!}</td>
       @endforeach
     </tr>

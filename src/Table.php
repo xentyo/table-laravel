@@ -4,9 +4,9 @@ namespace Xentyo\TableRenderizer;
 
 use Illuminate\Support\HtmlString;
 
-class Table extends Grid implements HtmlRenderable
+class Table extends Grid implements Interfaces\HtmlRenderable
 {
-    use HtmlElement;
+    use Traits\HtmlElement;
 
     public function column($property, $name = '')
     {
@@ -18,29 +18,38 @@ class Table extends Grid implements HtmlRenderable
     public function row(array $values)
     {
         $row = new Row($values);
+        $this->addRow($row);
         return $row;
     }
 
     public function headers()
     {
         $headers = [];
-        foreach ($this->columns as $key => $column) {
-            $headers[] = $column->property();
+        foreach ($this->columns() as $key => $column) {
+            $headers[] = $column->name();
         }
         return $headers;
     }
 
-    public function prop($key, $value){
-      $this->addProperty(new Property($key, $value));
-      return $this;
+    public function prop($key, $value)
+    {
+        $this->addProperty(new Property($key, $value));
+        return $this;
     }
 
-    public function props(){
-      return $this->getProps();
+    public function props(array $props = [])
+    {
+        foreach ($props as $key => $value) {
+            $this->prop($key, $value);
+        }
+        return count($props) > 0 ? $this : $this->getProps();
     }
 
     public function render()
     {
-      return new HtmlString(view('views::table', ['table', $this]))->render();
+        $view = view('XTRviews::table', ['table' => $this]);
+        $html_str = new HtmlString($view);
+        // echo $html_str->toHtml();
+        return $html_str->toHtml();
     }
 }

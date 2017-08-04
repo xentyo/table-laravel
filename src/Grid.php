@@ -7,13 +7,14 @@ namespace Xentyo\TableRenderizer;
  */
 class Grid
 {
-    public static $INDEX_ROW = 0;
+    protected static $INDEX_ROW = 0;
     protected $grid = [];
     protected $rows = [];
+    protected $columns = [];
 
     public function columns()
     {
-        return array_keys($this->grid);
+        return $this->columns;
     }
 
     public function rows()
@@ -23,7 +24,8 @@ class Grid
 
     public function addColumn(Column $column)
     {
-        $this->grid[$column] = [];
+        $this->grid[$column->property()] = [];
+        $this->columns[] = $column;
     }
 
     public function getColumn($key)
@@ -46,12 +48,9 @@ class Grid
         $row->setIndex(++self::$INDEX_ROW);
         foreach ($this->grid as $column => $rows) {
             foreach ($row->values() as $key => $value) {
-                if ($column->property() == $key) {
-                    $this->grid[$column][$row->index] = $value;
+                if ($column == $key) {
+                    $this->grid[$column][$row->index()] = $value;
                 }
-            }
-            if (isset($this->grid[$column])) {
-                $this->grid[$column] = null;
             }
         }
         return $this->rows[] = $row;
