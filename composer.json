@@ -1,12 +1,13 @@
 {
-    "name": "xentyo/laravel-table-renderizer",
-    "description": "The table renderizer is a project to provide a friendly functions to render a HTML table",
-    "authors": [
-      {
-        "name": "Ezequiel Camacho",
-        "email": "xentyo@hotmail.com"
-      }
-    ],
-    "require": {},
-    "license": "MIT"
+  "name": "xentyo/laravel-table-renderizer",
+  "description": "The table renderizer is a project to provide a friendly functions to render a HTML table",
+  "authors": [{
+    "name": "Ezequiel Camacho",
+    "email": "xentyo@hotmail.com"
+  }],
+  "require": {
+    "php": ">=5.4",
+    "illuminate/support": "~5"
+  },
+  "license": "MIT"
 }
