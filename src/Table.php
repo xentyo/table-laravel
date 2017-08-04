@@ -2,6 +2,8 @@
 
 namespace Xentyo\TableRenderizer;
 
+use Illuminate\Support\HtmlString;
+
 class Table extends Grid implements HtmlRenderable
 {
     use HtmlElement;
@@ -28,7 +30,17 @@ class Table extends Grid implements HtmlRenderable
         return $headers;
     }
 
-    public function render($id = null)
+    public function prop($key, $value){
+      $this->addProperty(new Property($key, $value));
+      return $this;
+    }
+
+    public function props(){
+      return $this->getProps();
+    }
+
+    public function render()
     {
+      return new HtmlString(view('views::table', ['table', $this]))->render();
     }
 }

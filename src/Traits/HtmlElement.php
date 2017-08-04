@@ -36,10 +36,10 @@ trait HtmlElement
 
     public function getProps()
     {
-        $prop = '';
+        $props = '';
         foreach ($this->properties as $key => $prop) {
-          $prop .= ' '.$prop->html();
+          $props .= ' '.$prop->html();
         }
-        return $prop;
+        return $props;
     }
 }
