@@ -1,4 +1,4 @@
-<table>
+<table{{$table->props()}}>
   <thead>
     <tr>
       @foreach ($table->headers as $key => $header)
