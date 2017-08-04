@@ -42,5 +42,19 @@ trait HtmlElement
           $props .= ' '.$prop->html();
         }
         return $props;
+    }    
+
+    public function prop($key, $value)
+    {
+        $this->addProperty(new Property($key, $value));
+        return $this;
+    }
+
+    public function props(array $props = [])
+    {
+        foreach ($props as $key => $value) {
+            $this->prop($key, $value);
+        }
+        return count($props) > 0 ? $this : $this->getProps();
     }
 }

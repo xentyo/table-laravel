@@ -12,17 +12,7 @@ class Grid
     protected $rows = [];
     protected $columns = [];
 
-    public function columns()
-    {
-        return $this->columns;
-    }
-
-    public function rows()
-    {
-        return $this->rows;
-    }
-
-    public function addColumn(Column $column)
+    protected function addColumn(Column $column)
     {
         $this->grid[$column->property()] = [];
         $this->columns[] = $column;
@@ -38,14 +28,30 @@ class Grid
         return false;
     }
 
-    public function removeColumn(Column $column)
+    protected function removeColumn(Column $column)
     {
         unset($this->grid[$column]);
     }
 
-    public function addRow(Row $row)
+    public function column($property, $name = null)
+    {
+        $column = new Column($property, $name);
+        $this->addColumn($column);
+        return $this;
+    }
+
+    public function columns(array $columns = [])
+    {
+        foreach ($columns as $property => $name) {
+            $this->addColumn(new Column($property, $name));
+        }
+        return count($columns) > 0 ? $this : $this->columns;
+    }
+
+    protected function addRow(Row $row, array $props = [])
     {
         $row->setIndex(++self::$INDEX_ROW);
+        $row->props($props);
         foreach ($this->grid as $column => $rows) {
             foreach ($row->values() as $key => $value) {
                 if ($column == $key) {
@@ -54,5 +60,20 @@ class Grid
             }
         }
         return $this->rows[] = $row;
+    }
+
+    public function row(array $values, array $props = [])
+    {
+        $row = new Row($values);
+        $this->addRow($row, $props);
+        return $row;
+    }
+
+    public function rows(array $rows = [], array $props = [])
+    {
+        foreach ($rows as $values) {
+            $this->addRow(new Row($values), $props);
+        }
+        return count($rows) > 0 ? $this : $this->rows;
     }
 }

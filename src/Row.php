@@ -7,9 +7,11 @@ namespace Xentyo\TableRenderizer;
  */
 class Row extends TableList
 {
+    use Traits\HtmlElement;
+
     protected $index;
 
-    public function __construct($values = [], $index = -1)
+    public function __construct(array $values = [], $index = -1)
     {
         parent::__construct($values);
         $this->index = $index;

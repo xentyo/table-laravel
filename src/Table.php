@@ -7,20 +7,7 @@ use Illuminate\Support\HtmlString;
 class Table extends Grid implements Interfaces\HtmlRenderable
 {
     use Traits\HtmlElement;
-
-    public function column($property, $name = '')
-    {
-        $column = new Column($property, $name);
-        $this->addColumn($column);
-        return $this;
-    }
-
-    public function row(array $values)
-    {
-        $row = new Row($values);
-        $this->addRow($row);
-        return $row;
-    }
+    protected $trProps = [];
 
     public function headers()
     {
@@ -31,25 +18,21 @@ class Table extends Grid implements Interfaces\HtmlRenderable
         return $headers;
     }
 
-    public function prop($key, $value)
+    protected function addRow(Row $row, array $props = [])
     {
-        $this->addProperty(new Property($key, $value));
-        return $this;
+        return parent::addRow($row, $this->trProps);
     }
 
-    public function props(array $props = [])
+    public function trProps(array $props = [])
     {
-        foreach ($props as $key => $value) {
-            $this->prop($key, $value);
-        }
-        return count($props) > 0 ? $this : $this->getProps();
+        $this->trProps = $props;
+        return count($props) > 0 ? $this : $this->trProps;
     }
 
     public function render()
     {
         $view = view('XTRviews::table', ['table' => $this]);
         $html_str = new HtmlString($view);
-        // echo $html_str->toHtml();
         return $html_str->toHtml();
     }
 }
