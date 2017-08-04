@@ -36,6 +36,10 @@ class Table extends Grid implements Interfaces\HtmlRenderable
         return $html_str->toHtml();
     }
 
+    public function hasRows(){
+      return count($this->rows) > 0;
+    }
+
     public static function create($mixed, array $columns = [])
     {
         switch (get_class($mixed)) {
