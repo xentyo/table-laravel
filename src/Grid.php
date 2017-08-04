@@ -34,7 +34,7 @@ class Grid
 
     public function addRow(Row $row)
     {
-        $row = new Row($row->values(), ++self::$INDEX_ROW);
+        $row->setIndex(++self::$INDEX_ROW);
         foreach ($this->grid as $column => $rows) {
             foreach ($row->values() as $key => $value) {
                 if ($column->name() == $key) {
