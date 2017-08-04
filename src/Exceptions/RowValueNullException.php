@@ -1,6 +1,6 @@
 <?php
 
-namespace xentyo\table\Exceptions;
+namespace xentyo\table\renderizer\Exceptions;
 
 /**
  *

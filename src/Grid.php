@@ -1,6 +1,6 @@
 <?php
 
-namespace xentyo\table;
+namespace xentyo\table\renderizer;
 
 /**
  *
