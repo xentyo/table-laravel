@@ -10,7 +10,7 @@
     @foreach ($table->rows() as $key => $row)
       <tr{!! $row->props() !!}>
         @foreach ($table->columns() as $key => $column)
-          <td>{!! $row->getValue($column->property()) !!}</td>
+          <td id="{{$column->property()}}">{!! $row->getValue($column->property()) !!}</td>
         @endforeach
       </tr>
     @endforeach
