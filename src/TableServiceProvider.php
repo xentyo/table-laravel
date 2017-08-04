@@ -10,13 +10,13 @@ class TableServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../../views', 'tableViews');
+        $this->loadViewsFrom(__DIR__.'/../../views', 'views');
         $this->publishes([__DIR__.'/../../views' => resource_path('views/vendor/courier')]);
     }
 
     public function register()
     {
-        $this->app->bind('table', function () {
+        $this->app->bind('Table', function () {
             return new Xentyo\TableRenderizer\Table;
         });
     }
