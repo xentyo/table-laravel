@@ -35,4 +35,30 @@ class Table extends Grid implements Interfaces\HtmlRenderable
         $html_str = new HtmlString($view);
         return $html_str->toHtml();
     }
+
+    public static function create($mixed, array $columns = [])
+    {
+        switch (get_class($mixed)) {
+          case \Illuminate\Database\Eloquent\Collection::class:
+              $row = [];
+              $rows = [];
+              $attrs = [];
+              foreach ($mixed->all() as $obj) {
+                  foreach ($obj->attributesToArray() as $attr => $value) {
+                      $attrs[] = $attr;
+                      $row[$attr] = $value;
+                  }
+                  $rows[] = $row;
+                  $row = [];
+              }
+              $table = new Table;
+              if (count($columns) == 0) {
+                  $columns = array_unique($attrs);
+              }
+              $table->columns($columns);
+              $table->rows($rows);
+              return $table;
+          default: return null;
+      }
+    }
 }

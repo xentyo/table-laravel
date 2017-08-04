@@ -40,9 +40,13 @@ class Grid
         return $this;
     }
 
-    public function columns(array $columns = [])
+    public function columns(array $columns = [], $assosiative = false)
     {
         foreach ($columns as $property => $name) {
+            if (!$assosiative && is_integer($property)) {
+                $property = $name;
+                $name = null;
+            }
             $this->addColumn(new Column($property, $name));
         }
         return count($columns) > 0 ? $this : $this->columns;
