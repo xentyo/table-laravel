@@ -13,7 +13,7 @@ class TableServiceProvider extends ServiceProvider
       $this->loadViewsFrom(__DIR__.'/../views', 'tableRender');
 
       $this->publishes([
-        __DIR__.'/../views' => base_path('resources/views/vendor/xentyo/table-renderizer'),
+        __DIR__.'/../../views' => base_path('resources/views/vendor/xentyo/table-renderizer'),
         'tableRender'
       ]);
     }
