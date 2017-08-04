@@ -10,7 +10,7 @@
     @foreach ($table->rows() as $key => $row)
       <tr>
         @foreach ($table->columns() as $key => $column)
-          <td>{!! $row->getValue($column->name()) !!}</td>
+          <td>{!! $row->getValue($column->property()) !!}</td>
         @endforeach
       </tr>
     @endforeach
