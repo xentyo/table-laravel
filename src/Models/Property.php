@@ -7,9 +7,7 @@ namespace Xentyo\TableRenderizer;
  */
 class Property
 {
-    protected $keyval;
-    public $key;
-    public $val;
+    use Xentyo\KeyVal;
     public function __construct($key, $val = '')
     {
         $this->keyval[$key] = $val;

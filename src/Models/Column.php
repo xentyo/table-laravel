@@ -7,18 +7,24 @@ namespace Xentyo\TableRenderizer;
  */
 class Column extends TableList
 {
-  protected $name;
+    use Xentyo\KeyVal;
 
-  function __construct($name = '', $values = [])
-  {
-    parent::__construct($values);
-    $this->name = $name;
-  }
+    public function __construct($property, $name = null)
+    {
+        $name = $name ?? ucwords(str_replace('_', ' ', $property));
+        
+        $this->keyval[$property] => $name;
+        $this->key = $property;
+        $this->val = $name;
+    }
 
-  public function name(){
-    return $this->name;
-  }
+    public function property()
+    {
+        return $this->key;
+    }
+
+    public function name()
+    {
+        return $this->name;
+    }
 }
-
-
- ?>
